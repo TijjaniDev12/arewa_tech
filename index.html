@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Arewa Tech Store — phones, computers and everyday tech accessories.">
+<title>Arewa Tech — Phones, Computers & Accessories</title>
+<style>
+:root {
+  --site-primary: #173f35;
+  --site-on-primary: #ffffff;
+  --site-secondary: #e7b85c;
+  --site-on-secondary: #17231f;
+  --site-background: #f6f5ef;
+  --site-on-background: #18241f;
+  --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-font-heading: Georgia, "Times New Roman", serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+  color-scheme: light dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--site-font-body); background: var(--site-background); color: var(--site-on-background); }
+#app { min-height: 100vh; width: 100%; border-radius: 0; background-color: light-dark(var(--site-background), #15211d); color: light-dark(var(--site-on-background), #edf1ec); overflow: hidden; }
+a { color: inherit; text-decoration: none; }
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+.container { width: min(1160px, calc(100% - 44px)); margin: auto; }
+.topbar { background: var(--site-primary); color: var(--site-on-primary); font-size: 12px; letter-spacing: .04em; padding: 10px 0; text-align: center; }
+header { background: light-dark(#fff, #1d2b26); border-bottom: 1px solid light-dark(#e8e7df, #34443d); position: sticky; top: 0; z-index: 10; }
+.nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.brand { display: flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -.04em; font-size: 20px; }
+.brand-mark { width: 38px; height: 38px; display: grid; place-items: center; background: var(--site-secondary); color: var(--site-on-secondary); border-radius: 12px; font-family: var(--site-font-heading); font-size: 22px; }
+.navlinks { display: flex; gap: 30px; align-items: center; font-size: 13px; color: light-dark(#53625a, #c4d0c8); }
+.navlinks a:hover { color: var(--site-secondary); }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.cart-btn, .menu-btn { border: 1px solid light-dark(#dfe3dc, #46564e); color: inherit; background: transparent; border-radius: 999px; padding: 10px 15px; font-size: 13px; }
+.cart-count { background: var(--site-secondary); color: #18241f; border-radius: 99px; padding: 2px 7px; margin-left: 5px; font-size: 11px; font-weight: 800; }
+.menu-btn { display: none; }
+.hero { background: var(--site-primary); color: white; position: relative; overflow: hidden; }
+.hero::after { content: ""; position: absolute; width: 460px; height: 460px; border: 1px solid rgba(255,255,255,.15); border-radius: 50%; right: -110px; top: -190px; box-shadow: 0 0 0 45px rgba(255,255,255,.035), 0 0 0 90px rgba(255,255,255,.025); opacity: var(--site-decoration-opacity); pointer-events: none; }
+.hero-inner { min-height: 500px; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 45px; padding: calc(64px * var(--site-spacing-scale)) 0; }
+.eyebrow { color: var(--site-secondary); text-transform: uppercase; letter-spacing: .18em; font-size: 11px; font-weight: 800; }
+h1,h2,h3 { font-family: var(--site-font-heading); font-weight: 500; letter-spacing: -.045em; }
+h1 { font-size: calc(clamp(48px, 6vw, 76px) * var(--site-heading-scale)); line-height: .99; margin: 18px 0; max-width: 620px; }
+.hero-copy { color: #d8e2db; max-width: 480px; line-height: 1.8; font-size: 15px; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+.btn { border: 0; padding: 14px 21px; border-radius: calc(7px * var(--site-radius-scale)); font-weight: 750; font-size: 13px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; transition: transform .2s, opacity .2s; }
+.btn:hover { transform: translateY(-2px); }
+.btn-gold { background: var(--site-secondary); color: var(--site-on-secondary); }
+.btn-outline { border: 1px solid rgba(255,255,255,.45); color: white; background: transparent; }
+.hero-art { min-height: 340px; position: relative; display: grid; place-items: center; }
+.art-card { width: min(100%, 390px); aspect-ratio: 1 / 1.04; border-radius: 48% 48% 18px 18px; background: linear-gradient(145deg, #eacb8a, #bd8950); display: grid; place-items: center; position: relative; overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,.22); }
+.art-card::before { content: "A"; font-family: Georgia,serif; font-size: 260px; color: rgba(255,255,255,.25); position: absolute; line-height: 1; }
+.art-label { position: absolute; bottom: 24px; left: 24px; background: rgba(23,63,53,.92); color: white; padding: 13px 17px; border-radius: 10px; font-size: 12px; letter-spacing: .08em; }
+.trust { background: var(--site-secondary); color: var(--site-on-secondary); }
+.trust-inner { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; padding: 20px 0; text-align: center; font-size: 12px; font-weight: 800; letter-spacing: .04em; }
+section { padding: calc(78px * var(--site-spacing-scale)) 0; }
+.section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 30px; }
+.section-head h2 { font-size: calc(42px * var(--site-heading-scale)); margin: 9px 0 0; }
+.muted { color: light-dark(#68756d, #b2c0b7); line-height: 1.7; }
+.text-link { color: var(--site-primary); font-size: 13px; font-weight: 800; border-bottom: 1px solid var(--site-secondary); padding-bottom: 5px; }
+.categories { display: grid; grid-template-columns: repeat(4,1fr); gap: 15px; }
+.category { background: light-dark(#fff, #20312a); padding: 23px; border: 1px solid light-dark(#e9e9e1, #394a41); border-radius: calc(12px * var(--site-radius-scale)); min-height: 135px; text-align: left; color: inherit; transition: .2s; }
+.category:hover, .category.active { border-color: var(--site-secondary); transform: translateY(-3px); }
+.category .emoji { font-size: 26px; display: block; margin-bottom: 16px; }
+.category strong { display: block; font-family: var(--site-font-heading); font-size: 19px; font-weight: 500; }
+.category small { color: light-dark(#7b857e, #adbbb2); display: block; margin-top: 5px; }
+.products { background: light-dark(#eeeee7, #192720); }
+.product-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+.product { background: light-dark(#fff, #20312a); border: 1px solid light-dark(#e6e7df, #394a41); border-radius: calc(12px * var(--site-radius-scale)); overflow: hidden; }
+.product-art { height: 205px; display: grid; place-items: center; font-size: 65px; background: linear-gradient(135deg, #e9e3d3, #d6c4a2); }
+.product:nth-child(2n) .product-art { background: linear-gradient(135deg, #dce7df, #a9c0b0); }
+.product-info { padding: 17px; }
+.product-info small { color: light-dark(#7c877f, #b2c0b7); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; }
+.product-info h3 { font-size: 20px; margin: 8px 0; }
+.price-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 15px; }
+.price { font-weight: 850; font-size: 15px; }
+.add { border: 0; background: var(--site-primary); color: white; width: 35px; height: 35px; border-radius: 50%; font-size: 20px; }
+.empty { grid-column: 1/-1; padding: 35px; text-align: center; color: #78847c; }
+.story { display: grid; grid-template-columns: .9fr 1.1fr; gap: 70px; align-items: center; }
+.story-visual { min-height: 330px; border-radius: 16px; background: var(--site-primary); display: grid; place-items: center; color: var(--site-secondary); font-family: Georgia,serif; font-size: 100px; position: relative; overflow: hidden; }
+.story-visual::after { content:""; position:absolute; inset:22px; border:1px solid rgba(255,255,255,.25); border-radius:12px; }
+.story h2 { font-size: calc(43px * var(--site-heading-scale)); margin: 10px 0 18px; }
+.story p { line-height: 1.9; color: light-dark(#68756d, #b2c0b7); }
+.benefits { display: flex; gap: 25px; margin-top: 25px; flex-wrap: wrap; }
+.benefits span { font-size: 12px; font-weight: 800; }
+.contact { background: var(--site-primary); color: white; }
+.contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 65px; align-items: center; }
+.contact h2 { font-size: calc(44px * var(--site-heading-scale)); margin: 12px 0; }
+.contact p { color: #d4dfd7; line-height: 1.8; }
+.contact-card { background: light-dark(#fff, #20312a); color: light-dark(#18241f, #edf1ec); padding: 27px; border-radius: 14px; }
+.field { margin-bottom: 14px; }
+.field label { display: block; font-size: 12px; font-weight: 800; margin-bottom: 7px; }
+.field input,.field textarea { width: 100%; border: 1px solid light-dark(#dfe4dc, #46564e); border-radius: 7px; padding: 12px; background: light-dark(#fafbf8, #17241e); color: inherit; outline-color: var(--site-secondary); }
+.field textarea { min-height: 90px; resize: vertical; }
+footer { background: #102d26; color: #e9eee9; padding: 28px 0; }
+.footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-size: 12px; color: #b8c8bf; }
+.cart-panel { position: fixed; inset: 0; background: rgba(0,0,0,.48); z-index: 30; display: none; justify-content: flex-end; }
+.cart-panel.open { display: flex; }
+.cart-drawer { background: light-dark(#fff, #1d2b26); color: inherit; width: min(420px,100%); height: 100%; padding: 25px; overflow: auto; }
+.drawer-head { display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid light-dark(#e3e7df,#394a41); padding-bottom:15px; }
+.drawer-head h3 { font-size:26px; margin:0; }
+.close { background:transparent; border:0; color:inherit; font-size:25px; }
+.cart-line { display:flex; justify-content:space-between; gap:12px; padding:16px 0; border-bottom:1px solid light-dark(#e8eae4,#394a41); font-size:13px; }
+.cart-total { display:flex; justify-content:space-between; font-weight:850; padding:20px 0; }
+.note { font-size:11px; line-height:1.6; color:light-dark(#77837b,#b2c0b7); }
+@media (max-width: 850px) { .hero-inner { grid-template-columns:1fr  .8fr; gap:15px; } .product-grid { grid-template-columns:repeat(2,1fr); } .categories { grid-template-columns:repeat(2,1fr); } .story { gap:30px; } }
+@media (max-width: 620px) { .container { width: min(100% - 30px, 1160px); } .nav { min-height:65px; } .navlinks { display:none; position:absolute; top:65px; left:0; right:0; padding:20px; background:light-dark(#fff,#1d2b26); flex-direction:column; align-items:flex-start; border-bottom:1px solid #7773; } .navlinks.show { display:flex; } .menu-btn { display:block; } .hero-inner { grid-template-columns:1fr; padding:55px 0; } .hero-art { min-height:260px; } .art-card { width: min(75%,290px); } h1 { font-size:52px; } .trust-inner { grid-template-columns:1fr; gap:10px; } section { padding:55px 0; } .section-head { align-items:flex-start; flex-direction:column; } .section-head h2,.story h2,.contact h2 { font-size:36px; } .categories { gap:10px; } .category { padding:16px; min-height:125px; } .product-art { height:155px; } .product-info { padding:13px; } .story,.contact-inner { grid-template-columns:1fr; gap:30px; } .story-visual { min-height:230px; } }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="topbar">AREWA TECH STORE · PHONES, COMPUTERS & ACCESSORIES</div>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home"><span class="brand-mark">A</span><span>AREWA<span style="color:#c18d36">.</span>TECH</span></a>
+      <nav class="navlinks" id="navlinks"><a href="#home">Home</a><a href="#categories">Categories</a><a href="#shop">Shop</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+      <div class="nav-actions"><button class="cart-btn" id="openCart">Bag <span class="cart-count" id="cartCount">0</span></button><button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button></div>
+    </div>
+  </header>
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-inner">
+        <div><div class="eyebrow">Your trusted technology store</div><h1>Power your<br>everyday.</h1><p class="hero-copy">Discover smartphones, laptops, computers and accessories for work, learning and entertainment. Shop useful technology with clear product details and friendly customer support.</p><div class="actions"><a class="btn btn-gold" href="#shop">Explore devices <span>↗</span></a><a class="btn btn-outline" href="#about">Why Arewa Tech</a></div></div>
+        <div class="hero-art"><div class="art-card"><div class="art-label">SMARTER TECH. BETTER DAYS.</div></div></div>
+      </div>
+    </section>
+    <div class="trust"><div class="container trust-inner"><span>✦ PHONES & COMPUTERS</span><span>✦ ACCESSORIES & GADGETS</span><span>✦ FRIENDLY CUSTOMER SUPPORT</span></div></div>
+    <section id="categories"><div class="container"><div class="section-head"><div><div class="eyebrow">Find your favourites</div><h2>Shop by category</h2></div><p class="muted">A little something for every day.</p></div><div class="categories">
+      <button class="category active" data-filter="all"><span class="emoji">📱</span><strong>All products</strong><small>Browse our tech range</small></button>
+      <button class="category" data-filter="phones"><span class="emoji">📱</span><strong>Smartphones</strong><small>Phones and essentials</small></button>
+      <button class="category" data-filter="computers"><span class="emoji">💻</span><strong>Computers</strong><small>Laptops and desktops</small></button>
+      <button class="category" data-filter="accessories"><span class="emoji">🎧</span><strong>Accessories</strong><small>Chargers, audio and more</small></button>
+    </div></div></section>
+    <section class="products" id="shop"><div class="container"><div class="section-head"><div><div class="eyebrow">The current edit</div><h2>Popular picks</h2></div><span class="muted" id="productCount">Four sample products</span></div><div class="product-grid" id="productGrid">
+      <article class="product" data-category="phones"><div class="product-art">📱</div><div class="product-info"><small>Smartphones · Samsung</small><h3>Samsung Galaxy Phones</h3><div class="price-row"><span class="price">Price on request</span><button class="add" data-name="Samsung Galaxy Phone" data-price="0" aria-label="Add Samsung Galaxy Phone">+</button></div></div></article>
+      <article class="product" data-category="phones"><div class="product-art">📱</div><div class="product-info"><small>Smartphones · Apple</small><h3>Apple iPhone</h3><div class="price-row"><span class="price">Price on request</span><button class="add" data-name="Apple iPhone" data-price="0" aria-label="Add Apple iPhone">+</button></div></div></article>
+      <article class="product" data-category="phones"><div class="product-art">📱</div><div class="product-info"><small>Smartphones · Tecno</small><h3>Tecno Smartphones</h3><div class="price-row"><span class="price">Price on request</span><button class="add" data-name="Tecno Smartphone" data-price="0" aria-label="Add Tecno Smartphone">+</button></div></div></article>
+      <article class="product" data-category="phones"><div class="product-art">📱</div><div class="product-info"><small>Smartphones · Infinix</small><h3>Infinix Smartphones</h3><div class="price-row"><span class="price">Price on request</span><button class="add" data-name="Infinix Smartphone" data-price="0" aria-label="Add Infinix Smartphone">+</button></div></div></article>
+      <article class="product" data-category="computers"><div class="product-art">💻</div><div class="product-info"><small>Laptops · HP</small><h3>HP Laptops</h3><div class="price-row"><span class="price">Price on request</span><button class="add" data-name="HP Laptop" data-price="0" aria-label="Add HP Laptop">+</button></div></div></article>
+      <article class="product" data-category="computers"><div class="product-art">💻</div><div class="product-info"><small>Laptops · Dell</small><h3>Dell Laptops</h3><div class="price-row"><span class="price">Price on request</span><button class="add" data-name="Dell Laptop" data-price="0" aria-label="Add Dell Laptop">+</button></div></div></article>
+      <article class="product" data-category="computers"><div class="product-art">💻</div><div class="product-info"><small>Laptops · Lenovo</small><h3>Lenovo Laptops</h3><div class="price-row"><span class="price">Price on request</span><button class="add" data-name="Lenovo Laptop" data-price="0" aria-label="Add Lenovo Laptop">+</button></div></div></article>
+      <article class="product" data-category="accessories"><div class="product-art">🎧</div><div class="product-info"><small>Accessories · Audio</small><h3>Headphones & Earbuds</h3><div class="price-row"><span class="price">Price on request</span><button class="add" data-name="Headphones and Earbuds" data-price="0" aria-label="Add Headphones and Earbuds">+</button></div></div></article>
+      <article class="product" data-category="accessories"><div class="product-art">🔌</div><div class="product-info"><small>Accessories · Power</small><h3>Chargers & Cables</h3><div class="price-row"><span class="price">Price on request</span><button class="add" data-name="Chargers and Cables" data-price="0" aria-label="Add Chargers and Cables">+</button></div></div></article>
+    </div></div></section>
+    <section id="about"><div class="container story"><div class="story-visual">A<span style="position:absolute;bottom:24px;font:700 11px var(--site-font-body);letter-spacing:.25em;color:white">TECH YOU CAN TRUST</span></div><div><div class="eyebrow">Technology made easier</div><h2>The right tech for work, study and life.</h2><p>Arewa Tech is a technology-store concept focused on smartphones, laptops, computers and useful accessories. Our aim is to help customers compare options, understand product details and choose devices that fit their needs and budget.</p><p>We believe honest product information and helpful customer support should come first. Product listings and prices on this preview are examples until you provide your real stock.</p><div class="benefits"><span>✓ Clear product details</span><span>✓ Helpful support</span><span>✓ Easy order enquiries</span></div></div></div></section>
+    <section class="contact" id="contact"><div class="container contact-inner"><div><div class="eyebrow">Talk to our team</div><h2>Looking for a phone, laptop or accessory?</h2><p>Ask about availability, specifications, warranty information or delivery. We’ll help you make an informed choice.</p><p><strong>Phone / WhatsApp:</strong> <a href="https://wa.me/2348125192076" target="_blank" rel="noopener noreferrer">+234 812 519 2076 — Chat on WhatsApp</a><br><strong>Location:</strong> Dutse, Jigawa State, Nigeria</p></div><form class="contact-card" id="contactForm"><div class="field"><label for="customerName">Your name</label><input id="customerName" required placeholder="Enter your name"></div><div class="field"><label for="customerEmail">Email or phone</label><input id="customerEmail" required placeholder="How can we reach you?"></div><div class="field"><label for="customerMessage">Device or question</label><textarea id="customerMessage" required placeholder="e.g. I need a laptop for school..."></textarea></div><button class="btn btn-gold" type="submit">Prepare enquiry ↗</button><p class="note" id="formNote">Contact us directly on WhatsApp using the link provided. The enquiry form still needs a business email setup.</p></form></div></section>
+  </main>
+  <footer><div class="container footer-inner"><span>© <span id="year"></span> Arewa Tech. All rights reserved.</span><span>Technology for everyday life.</span><span>Instagram · Facebook · WhatsApp — add your links</span></div></footer>
+</div>
+<div class="cart-panel" id="cartPanel" aria-hidden="true"><aside class="cart-drawer"><div class="drawer-head"><h3>Your bag</h3><button class="close" id="closeCart" aria-label="Close bag">×</button></div><div id="cartItems"><p class="muted">Your bag is empty. Add a product to get started.</p></div><div class="cart-total"><span>Total</span><span id="cartTotal">₦0</span></div><button class="btn btn-gold" id="orderBtn" style="width:100%">Prepare order summary</button><p class="note">Demo store: connect your WhatsApp number and confirm delivery/payment details before accepting real orders.</p></aside></div>
+<script>
+const cart = [];
+const money = n => '₦' + n.toLocaleString('en-NG');
+const panel = document.getElementById('cartPanel');
+function renderCart(){
+  const count = cart.reduce((s,p)=>s+p.qty,0);
+  document.getElementById('cartCount').textContent = count;
+  document.getElementById('cartTotal').textContent = money(cart.reduce((s,p)=>s+p.price*p.qty,0));
+  const target = document.getElementById('cartItems');
+  target.innerHTML = cart.length ? cart.map((p,i)=>`<div class="cart-line"><span>${p.name}<br><small>Qty: ${p.qty}</small></span><strong>${money(p.price*p.qty)} <button aria-label="Remove ${p.name}" data-remove="${i}" style="border:0;background:none;color:#b65b45;margin-left:6px">×</button></strong></div>`).join('') : '<p class="muted">Your bag is empty. Add a product to get started.</p>';
+}
+document.querySelectorAll('.add').forEach(btn=>btn.addEventListener('click',()=>{const found=cart.find(p=>p.name===btn.dataset.name);if(found)found.qty++;else cart.push({name:btn.dataset.name,price:Number(btn.dataset.price),qty:1});renderCart();btn.textContent='✓';setTimeout(()=>btn.textContent='+',700);}));
+document.getElementById('cartItems').addEventListener('click',e=>{if(e.target.dataset.remove!==undefined){cart.splice(Number(e.target.dataset.remove),1);renderCart();}});
+document.getElementById('openCart').addEventListener('click',()=>{panel.classList.add('open');panel.setAttribute('aria-hidden','false');});
+function closeCart(){panel.classList.remove('open');panel.setAttribute('aria-hidden','true');}
+document.getElementById('closeCart').addEventListener('click',closeCart);
+panel.addEventListener('click',e=>{if(e.target===panel)closeCart();});
+document.getElementById('orderBtn').addEventListener('click',()=>{if(!cart.length){alert('Your bag is empty. Add a product first.');return;}const summary=cart.map(p=>`${p.name} x${p.qty}`).join('\n');const message=`Hello Arewa Tech, I would like to enquire about:\n${summary}\nPlease confirm availability, current prices, delivery fee and payment details.`;window.open(`https://wa.me/2348125192076?text=${encodeURIComponent(message)}`,'_blank','noopener,noreferrer');});
+document.querySelectorAll('.category').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.category').forEach(x=>x.classList.remove('active'));btn.classList.add('active');let visible=0;document.querySelectorAll('.product').forEach(card=>{const show=btn.dataset.filter==='all'||card.dataset.category===btn.dataset.filter;card.style.display=show?'':'none';if(show)visible++;});document.getElementById('productCount').textContent=`${visible} sample product${visible===1?'':'s'}`;}));
+document.getElementById('menuBtn').addEventListener('click',()=>document.getElementById('navlinks').classList.toggle('show'));
+document.querySelectorAll('.navlinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navlinks').classList.remove('show')));
+document.getElementById('contactForm').addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('customerName').value;const contact=document.getElementById('customerEmail').value;const msg=document.getElementById('customerMessage').value;const body=`Hello Arewa Tech, my name is ${name}.\nMy contact: ${contact}.\nEnquiry: ${msg}`;window.open(`https://wa.me/2348125192076?text=${encodeURIComponent(body)}`,'_blank','noopener,noreferrer');});
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
